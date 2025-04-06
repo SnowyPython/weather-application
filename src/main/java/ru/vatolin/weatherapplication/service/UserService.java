@@ -19,12 +19,6 @@ public class UserService {
         return user != null;
     }
 
-    public boolean passwordIsValid(UserDto userDto) {
-        User user = userRepository.findByLogin(userDto.getLogin()).orElse(null);
-
-        return passwordEncoder.matches(userDto.getPassword(), user.getPassword());
-    }
-
     public void registerUser(UserDto userDto) {
         String password = passwordEncoder.encode(userDto.getPassword());
 

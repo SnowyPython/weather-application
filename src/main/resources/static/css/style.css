@@ -17,10 +17,13 @@ section#page-content {
 }
 
 .weather-logo {
-    background-image: url("images/weather-app.png");
+    background-image: url("../images/weather-app.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
 
     min-height: 250px;
 }

@@ -20,7 +20,7 @@ public class UserController {
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/main")
     public String mainPage() {
-        return "index";
+        return "/index";
     }
 
     @GetMapping("/login")
@@ -29,7 +29,7 @@ public class UserController {
             model.addAttribute("error", "invalid");
             return "sign-in-with-errors";
         }
-        return "sign-in";
+        return "/sign-in";
     }
 
     @GetMapping("/register")
