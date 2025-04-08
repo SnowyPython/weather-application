@@ -21,3 +21,6 @@ logging:
       springframework:
         security: DEBUG
         web: DEBUG
+weather:
+  api:
+    key: eeed6c1dbfbf4263db33803caee57275

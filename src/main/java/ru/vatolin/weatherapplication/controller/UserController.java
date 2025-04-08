@@ -3,7 +3,6 @@ package ru.vatolin.weatherapplication.controller;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,12 +15,6 @@ import ru.vatolin.weatherapplication.service.UserService;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
-
-    @PreAuthorize("isAuthenticated()")
-    @GetMapping("/main")
-    public String mainPage() {
-        return "/index";
-    }
 
     @GetMapping("/login")
     public String loginGet(@RequestParam(required = false) String error, Model model) {
