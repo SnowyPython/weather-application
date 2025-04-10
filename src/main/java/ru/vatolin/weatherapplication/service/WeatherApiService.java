@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.vatolin.weatherapplication.dto.RawLocationDto;
 
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.net.http.HttpClient;
@@ -21,10 +22,19 @@ public class WeatherApiService {
 
     private final ObjectMapper objectMapper;
 
-    public RawLocationDto createLocationDto(String city) {
+    public RawLocationDto createLocationDtoCity(String city) {
         String encodeCity = URLEncoder.encode(city, StandardCharsets.UTF_8);
         String uri = "https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s&units=metric".formatted(encodeCity, keyApi);
-        RawLocationDto locationDto = null;
+        return createRawLocationDto(uri);
+    }
+
+    public RawLocationDto createLocationDtoCoordinates(BigDecimal latitude, BigDecimal longitude) {
+        String uri = "https://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&appid=%s&units=metric".formatted(latitude, longitude, keyApi);
+        return createRawLocationDto(uri);
+    }
+
+    private RawLocationDto createRawLocationDto(String uri) {
+        RawLocationDto rawLocationDto = null;
         try(HttpClient client = HttpClient.newHttpClient()) {
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(uri))
@@ -33,7 +43,7 @@ public class WeatherApiService {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
             if(response.statusCode() == 200) {
-                locationDto = objectMapper.readValue(response.body(), RawLocationDto.class);
+                rawLocationDto = objectMapper.readValue(response.body(), RawLocationDto.class);
             } else {
                 throw new RuntimeException("Creation failed");
             }
@@ -41,6 +51,6 @@ public class WeatherApiService {
             e.printStackTrace();
         }
 
-        return locationDto;
+        return rawLocationDto;
     }
 }

@@ -30,4 +30,8 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "location_id")
     )
     Set<Location> locations = new HashSet<>();
+
+    public void addLocation(Location location) {
+        locations.add(location);
+    }
 }
