@@ -45,12 +45,12 @@
                             <button class="btn-close" aria-label="Delete"></button>
                         </div>
                         <img class="card-img-top img-fluid"
-                             src="https://openweathermap.org/img/wn/01n@4x.png"
+                             th:src="@{'https://openweathermap.org/img/wn/' + ${location.icon} + '@4x.png'}"
                              alt="Weather icon">
                         <div class="card-body d-flex flex-column">
                             <h1 class="card-text" th:text="${location.temperature}">7°C</h1>
                             <h3 class="card-title" th:text="${location.city} + ', ' + ${location.codeCountry}">Tbilisi, GE</h3>
-                            <p class="card-text mb-1" th:text="${location.feels}">Feels like <span>2</span>°C.
+                            <p class="card-text mb-1" th:text="'Feels like ' + ${location.feels} + ' °C'">Feels like
                                 <span th:text="${location.main}">Clear sky</span>
                             </p>
                             <p class="card-text mb-1" th:text="'Humidity: ' + ${location.humidity}">Humidity: 70%</p>
