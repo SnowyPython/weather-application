@@ -60,4 +60,29 @@ public class RawLocationDto {
         @JsonProperty("country")
         private String codeCountry;
     }
+
+    public MainLocationDto convertToMainLocationDto() {
+        MainLocationDto mainLocationDto = new MainLocationDto();
+
+        mainLocationDto.setTemperature(this.getMain().getTemperature());
+        mainLocationDto.setCity(this.getCity());
+        mainLocationDto.setCodeCountry(this.getSys().getCodeCountry());
+        mainLocationDto.setFeels(this.getMain().getFeels());
+        mainLocationDto.setMain(this.getWeathers().getFirst().getMain());
+        mainLocationDto.setIcon(this.getWeathers().getFirst().getIcon());
+        mainLocationDto.setHumidity(this.getMain().getHumidity());
+
+        return mainLocationDto;
+    }
+
+    public SearchLocationDto convertToSearchLocationDto() {
+        SearchLocationDto searchLocationDto = new SearchLocationDto();
+
+        searchLocationDto.setCity(this.getCity());
+        searchLocationDto.setLatitude(this.getCoord().getLatitude());
+        searchLocationDto.setLongitude(this.getCoord().getLongitude());
+        searchLocationDto.setCodeCountry(this.getSys().getCodeCountry());
+
+        return searchLocationDto;
+    }
 }

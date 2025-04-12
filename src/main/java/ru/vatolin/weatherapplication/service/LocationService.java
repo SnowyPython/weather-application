@@ -6,8 +6,6 @@ import ru.vatolin.weatherapplication.dto.RawLocationDto;
 import ru.vatolin.weatherapplication.dto.SearchLocationDto;
 import ru.vatolin.weatherapplication.entity.Location;
 import ru.vatolin.weatherapplication.entity.User;
-import ru.vatolin.weatherapplication.repository.LocationRepository;
-import ru.vatolin.weatherapplication.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +13,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class LocationService {
-    private final UserRepository userRepository;
-    private final LocationRepository locationRepository;
     private final WeatherApiService apiService;
 
     public List<SearchLocationDto> getSearchedLocations(String city) {
@@ -24,8 +20,7 @@ public class LocationService {
 
         RawLocationDto rawLocationDto = apiService.createLocationDtoCity(city);
 
-        SearchLocationDto searchLocationDto = new SearchLocationDto();
-        searchLocationDto.convert(rawLocationDto);
+        SearchLocationDto searchLocationDto = rawLocationDto.convertToSearchLocationDto();
 
         list.add(searchLocationDto);
         return list;

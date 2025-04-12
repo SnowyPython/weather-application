@@ -51,8 +51,9 @@ public class UserService {
         if(locations != null) {
             for (Location location : locations) {
                 RawLocationDto rawLocationDto = apiService.createLocationDtoCity(location.getName());
-                MainLocationDto mainLocationDto = new MainLocationDto();
-                mainLocationDto.convert(rawLocationDto);
+
+                MainLocationDto mainLocationDto = rawLocationDto.convertToMainLocationDto();
+
                 mainLocationDtos.add(mainLocationDto);
             }
         }
