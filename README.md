@@ -57,6 +57,6 @@
 * **Метод:** `POST`
 * **URL** `/remove-location`
 ### Идея проекта
-Идея для проекта взята из: `https://zhukovsd.github.io/java-backend-learning-course/`
+Идея для проекта взята из: [Роадмап Сергея Жукова](https://zhukovsd.github.io/java-backend-learning-course/)
 
 Заготовка Front-end части взята там же.
