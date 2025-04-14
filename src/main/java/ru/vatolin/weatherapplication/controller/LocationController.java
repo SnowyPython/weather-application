@@ -32,7 +32,11 @@ public class LocationController {
     @GetMapping("/search")
     public String searchPage(@RequestParam(required = false) String location, Model model) {
         model.addAttribute("user", userService.getFormatedAuthenticatedLogin());
-        if(location != null) model.addAttribute("locations", locationService.getSearchedLocations(location));
+        try {
+            if (location != null) model.addAttribute("locations", locationService.getSearchedLocations(location));
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+        }
         if(location != null) model.addAttribute("searchQuery", location);
         return "/search-results";
     }
@@ -41,6 +45,13 @@ public class LocationController {
     @PostMapping("/add-location")
     public String addLocation(@RequestParam BigDecimal latitude, @RequestParam BigDecimal longitude, Principal principal) {
         userService.addLocationForUser(latitude, longitude, principal.getName());
+        return "redirect:/main";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/remove-location")
+    public String removeLocation(@RequestParam String city, Principal principal) {
+        userService.removeLocationForUser(city, principal.getName());
         return "redirect:/main";
     }
 }

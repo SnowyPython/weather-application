@@ -34,7 +34,7 @@ public class WeatherApiService {
     }
 
     private RawLocationDto createRawLocationDto(String uri) {
-        RawLocationDto rawLocationDto = null;
+        RawLocationDto rawLocationDto;
         try(HttpClient client = HttpClient.newHttpClient()) {
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(uri))
@@ -45,10 +45,10 @@ public class WeatherApiService {
             if(response.statusCode() == 200) {
                 rawLocationDto = objectMapper.readValue(response.body(), RawLocationDto.class);
             } else {
-                throw new RuntimeException("Creation failed");
+                throw new RuntimeException("Location not found");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e.getMessage());
         }
 
         return rawLocationDto;

@@ -71,6 +71,15 @@ public class UserService {
         }
     }
 
+    public void removeLocationForUser(String city, String login) {
+        User user = userRepository.findByLogin(login).orElse(null);
+
+        if(user != null) {
+            Set<Location> locations = user.getLocations();
+            locations.removeIf(location -> location.getName().equals(city));
+        }
+    }
+
     public String getFormatedAuthenticatedLogin() {
         String login = getAuthenticatedLogin();
         String[] array = login.split("@");
