@@ -22,12 +22,12 @@ public class UserController {
             model.addAttribute("error", "invalid");
             return "sign-in-with-errors";
         }
-        return "/sign-in";
+        return "sign-in";
     }
 
     @GetMapping("/register")
     public String registerGet() {
-        return "/sign-up";
+        return "sign-up";
     }
 
     @PostMapping("/register")
@@ -40,15 +40,15 @@ public class UserController {
 
         if(password.length() < 4) {
             model.addAttribute("error", "length");
-            return "/sign-up-with-errors";
+            return "sign-up-with-errors";
         }
         if(userService.userIsExist(login)) {
             model.addAttribute("error", "exists");
-            return "/sign-up-with-errors";
+            return "sign-up-with-errors";
         }
         if(!password.equals(confirmation)) {
             model.addAttribute("error", "match");
-            return "/sign-up-with-errors";
+            return "sign-up-with-errors";
         }
 
         UserDto userDto = new UserDto(login, password);

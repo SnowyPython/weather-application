@@ -11,7 +11,7 @@
     <groupId>ru.vatolin</groupId>
     <artifactId>weather-application</artifactId>
     <version>0.0.1</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>weather-application</name>
     <description>weather-application</description>
     <url/>

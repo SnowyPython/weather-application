@@ -25,7 +25,7 @@ public class LocationController {
         model.addAttribute("user", userService.getFormatedAuthenticatedLogin());
         model.addAttribute("locations", userService.getLocations(principal.getName()));
         if(location != null) model.addAttribute("searchQuery", location);
-        return "/index";
+        return "index";
     }
 
     @PreAuthorize("isAuthenticated()")
@@ -38,7 +38,7 @@ public class LocationController {
             model.addAttribute("error", e.getMessage());
         }
         if(location != null) model.addAttribute("searchQuery", location);
-        return "/search-results";
+        return "search-results";
     }
 
     @PreAuthorize("isAuthenticated()")
